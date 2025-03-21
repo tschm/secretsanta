@@ -16,7 +16,6 @@ jobs:
         uses: tschm/cradle/actions/tag@v0.1.55
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          build_package: 'false'
 
       - name: Debug Output Tag
         run: |
@@ -41,7 +40,6 @@ jobs:
         with:
           github_repository: ${{ github.repository }}
           tag: ${{ needs.tagging.outputs.new_tag }}
-          #dockerfile-path: 'docker/Dockerfile'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_actor: ${{ github.actor }}
           dockerfiles: 'docker'
