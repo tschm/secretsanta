@@ -42,4 +42,4 @@ jobs:
           tag: ${{ needs.tagging.outputs.new_tag }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_actor: ${{ github.actor }}
-          dockerfiles: 'docker'
+          dockerfiles: 'docker/Dockerfile'
