@@ -44,3 +44,4 @@ jobs:
           #dockerfile-path: 'docker/Dockerfile'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_actor: ${{ github.actor }}
+          dockerfiles: 'docker'
