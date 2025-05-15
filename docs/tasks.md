@@ -13,7 +13,7 @@ This document contains a comprehensive list of improvement tasks for the Secret 
 
 2. [ ] Create user documentation explaining how to use the Secret Santa application
 
-3. [ ] Add docstrings to all functions in app.py
+3. [x] Add docstrings to all functions in app.py
 
 4. [ ] Create a CONTRIBUTING.md file with guidelines for contributors
 
