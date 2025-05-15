@@ -11,14 +11,17 @@ venv: ## Create the virtual environment
 .PHONY: install
 install:  venv ## Install a virtual environment
 	${VENV}/bin/pip install --upgrade pip
-	# No dependencies for this project!
-	# ${VENV}/bin/pip install -r requirements.txt
+	${VENV}/bin/pip install -r requirements.txt
 
 .PHONY: fmt
 fmt: venv ## Run autoformatting and linting
 	${VENV}/bin/pip install pre-commit
 	${VENV}/bin/pre-commit install
 	${VENV}/bin/pre-commit run --all-files
+
+.PHONY: test
+test: install ## Run tests
+	${VENV}/bin/pytest tests/
 
 .PHONY: clean
 clean:  ## Clean up caches and build artifacts
