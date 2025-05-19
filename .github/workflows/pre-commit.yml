@@ -10,7 +10,7 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/tschm/cradle:v0.1.66
+      image: ghcr.io/tschm/cradle:v0.1.65
       options: --user 0
 
     steps:
@@ -20,7 +20,12 @@ jobs:
       #- name: Introduce python
       #  shell: bash
       #  run: |
-      #    #ln -s /usr/bin/python3 python
-      #    #python --version
+      #    ln -s /usr/bin/python3 python
+      #    python --version
 
-      - uses: tschm/cradle/actions/pre-commit@v0.1.65
+      #- uses: tschm/cradle/actions/pre-commit@v0.1.65
+      - name: Install deps
+        run: pip3 install pre-commit
+
+      - name: Run pre-commit
+        run: pre-commit run --show-diff-on-failure --color=always --verbose --all-files
