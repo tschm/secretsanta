@@ -18,7 +18,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Introduce python
+        shell: bash
         run: |
-          ln -s python3 python
+          ln -s /usr/bin/python3 python
+          python --version
 
       - uses: tschm/cradle/actions/pre-commit@v0.1.65
