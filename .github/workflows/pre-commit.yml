@@ -11,4 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/tschm/cradle:v0.1.65
     steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
       - uses: tschm/cradle/actions/pre-commit@v0.1.65
