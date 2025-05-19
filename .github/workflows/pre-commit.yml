@@ -28,4 +28,7 @@ jobs:
         run: pip3 install pre-commit
 
       - name: Run pre-commit
-        run: pre-commit run --show-diff-on-failure --color=always --verbose --all-files
+        run: |
+          pwd
+          ls -all
+          pre-commit run --show-diff-on-failure --color=always --verbose --all-files
