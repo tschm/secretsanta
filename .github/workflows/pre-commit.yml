@@ -10,7 +10,7 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/tschm/cradle:v0.1.65
+      image: ghcr.io/tschm/cradle:v0.1.66
       options: --user 0
 
     steps:
