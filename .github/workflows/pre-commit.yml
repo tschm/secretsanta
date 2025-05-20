@@ -9,8 +9,8 @@ permissions:
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/tschm/cradle:latest
+    #container:
+    #  image: ghcr.io/tschm/cradle:latest
 
     steps:
       - name: Checkout [${{ github.repository }}]
