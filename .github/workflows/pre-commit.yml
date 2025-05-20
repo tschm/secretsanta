@@ -21,7 +21,6 @@ jobs:
       - name: Install deps
         run: pip3 install pre-commit
 
-
       - name: Run pre-commit
         run: |
           pwd
