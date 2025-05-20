@@ -16,13 +16,15 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      # - uses: tschm/cradle/actions/pre-commit@v0.1.65
+      - uses: tschm/cradle/actions/pre-commit@v0.1.66
+
       # - name: Install deps
       #
       #   run: pip3 install pre-commit
 
-      - name: Run pre-commit
-        run: |
-          pwd
-          ls -all
-          pre-commit run --show-diff-on-failure --color=always --verbose --all-files
+      #- name: Run pre-commit
+      #  run: |
+      #    pwd
+      #    ls -all
+      #    pre-commit run --show-diff-on-failure --color=always --verbose --all-files
+
