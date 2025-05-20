@@ -17,12 +17,6 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      #- name: Introduce python
-      #  shell: bash
-      #  run: |
-      #    ln -s /usr/bin/python3 python
-      #    python --version
-
       #- uses: tschm/cradle/actions/pre-commit@v0.1.65
       - name: Install deps
         run: pip3 install pre-commit
