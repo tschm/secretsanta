@@ -11,15 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/tschm/cradle:latest
-      #options: --user 0
 
     steps:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      #- uses: tschm/cradle/actions/pre-commit@v0.1.65
-      - name: Install deps
-        run: pip3 install pre-commit
+      # - uses: tschm/cradle/actions/pre-commit@v0.1.65
+      # - name: Install deps
+      #   run: pip3 install pre-commit
 
       - name: Run pre-commit
         run: |
