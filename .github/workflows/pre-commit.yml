@@ -25,4 +25,4 @@ jobs:
         run: |
           pwd
           ls -all
-          python -m pre-commit run --show-diff-on-failure --color=always --verbose --all-files
+          pre-commit run --show-diff-on-failure --color=always --verbose --all-files
