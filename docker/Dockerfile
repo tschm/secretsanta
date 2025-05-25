@@ -6,7 +6,8 @@ ENV PATH="/home/user/.local/bin:$PATH" \
     UV_SYSTEM_PYTHON=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH="/app"
 
 # Create non-root user and chown the app directory
 RUN useradd -m -u 1000 user && mkdir /app && chown user:user /app
