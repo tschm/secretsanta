@@ -8,8 +8,8 @@ ENV PATH="/home/user/.local/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1
 
-# Create non-root user first to minimize layer rebuild
-RUN useradd -m -u 1000 user
+# Create non-root user and chown the app directory
+RUN useradd -m -u 1000 user && mkdir /app && chown user:user /app
 
 # Copy uv binary and make it executable in one layer
 COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/uv
@@ -21,12 +21,12 @@ WORKDIR /app
 # Copy and install requirements first to leverage caching
 # You need to be root if you install into the "system"
 COPY --chown=user:user ./requirements.txt requirements.txt
-RUN uv pip install -r requirements.txt
+RUN uv pip install --no-cache-dir -r requirements.txt
 
+COPY --chown=user:user ./pysanta pysanta
+
+# Switch to non-root user
 USER user
-
-# Copy application code
-COPY --chown=user:user . .
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
@@ -37,4 +37,4 @@ EXPOSE 7860
 
 # Use exec form of ENTRYPOINT with CMD for proper signal handling
 ENTRYPOINT ["marimo"]
-CMD ["run", "app.py", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["run", "pysanta/app.py", "--host", "0.0.0.0", "--port", "7860"]

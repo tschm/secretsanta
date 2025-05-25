@@ -71,6 +71,32 @@ else
     exit 1
 fi
 
+# Step 8: Check pysanta is installed
+echo "📦 Checking if pysanta is installed..."
+docker exec $TEST_CONTAINER_NAME ls -la /app
+if docker exec $TEST_CONTAINER_NAME python -c "import pysanta; print(f'pysanta is installed at: {pysanta.__file__}')" > /dev/null; then
+    echo -e "${GREEN}✅ pysanta is installed correctly${NC}"
+else
+    echo -e "${RED}❌ pysanta is not installed correctly${NC}"
+    docker logs $TEST_CONTAINER_NAME
+    docker stop $TEST_CONTAINER_NAME
+    docker rm $TEST_CONTAINER_NAME
+    exit 1
+fi
+
+## Step 9: Run the app
+#echo "🚀 Checking if app.py can be executed with marimo..."
+## Skip this test since we've already verified that marimo is installed and the app is accessible via HTTP
+#echo -e "${GREEN}✅ app.py is accessible via HTTP, which means it's executing correctly${NC}"
+#echo "🚀 Starting container..."
+##docker run -d --name testx -p 7861:7860 marimo-app-test marimo run app.py
+#docker exec $TEST_CONTAINER_NAME -p 2718:2718 ["marimo", "run", "app.py"]
+#docker logs $TEST_CONTAINER_NAME
+#docker stop $TEST_CONTAINER_NAME
+
+
+
+
 # Clean up
 echo "🧹 Cleaning up..."
 docker stop $TEST_CONTAINER_NAME
