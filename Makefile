@@ -45,14 +45,6 @@ marimo: install ## Install Marimo
 	@uv pip install --no-cache-dir  marimo
 	@uv run marimo edit app.py
 
-
-# Build the Jupyter Book documentation
-.PHONY: book
-book: install ## Compile the book
-	@uv pip install --no-cache-dir  jupyterlab jupyter-book
-	@uv run jupyter-book clean book
-	@uv run jupyter-book build book
-
 # Run the Marimo application
 .PHONY: app
 app: install ## Run the Marimo app
