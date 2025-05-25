@@ -52,12 +52,14 @@ book: install ## Compile the book
 	@uv run jupyter-book clean book
 	@uv run jupyter-book build book
 
+# Run the Marimo application
 .PHONY: app
-app: install
+app: install ## Run the Marimo app
 	@uv pip install marimo
 	@uv run marimo run app.py
 
+# Build and run the Docker container for the application
 .PHONY: build
-build:
+build: ## Build and run Docker container
 	@docker build -f docker/Dockerfile -t marimo-app .
 	@docker run -it --rm -p 7860:7860 marimo-app
