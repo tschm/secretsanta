@@ -25,4 +25,4 @@ jobs:
         uses: actions/checkout@v4
 
       # Run pre-commit checks using the cradle action
-      - uses: tschm/cradle/actions/pre-commit@v0.1.66
+      - uses: tschm/cradle/actions/pre-commit@v0.1.68
