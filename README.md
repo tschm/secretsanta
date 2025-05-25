@@ -2,6 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/secretsanta/badge)](https://www.codefactor.io/repository/github/tschm/secretsanta)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://github.com/renovatebot/renovate)
+[![Docker Test](https://github.com/tschm/secretsanta/actions/workflows/docker-test.yml/badge.svg)](https://github.com/tschm/secretsanta/actions/workflows/docker-test.yml)
 
 ## 🎁 About
 
@@ -46,7 +47,14 @@ make app
 ```bash
 # Build and run the Docker container
 make build
+
+# Test the Docker container
+make test-docker
 ```
+
+The Docker container is automatically tested on each push and pull request
+using GitHub Actions. The tests verify that the container builds correctly,
+starts up, and functions as expected.
 
 ## 🎄 How to Use
 
