@@ -36,6 +36,18 @@ This will run the `test_docker.sh` script, which performs the following tests:
 4. 💓 **Health Check**: Verifies the container's health check is working
 5. 👤 **User Test**: Confirms the container is running as the non-root user
 6. 📦 **Marimo Test**: Checks that Marimo is installed correctly
+7. 📦 **pysanta Test**: Verifies that the pysanta package is installed correctly
+
+## 📦 pysanta Package
+
+The Docker container includes the `pysanta` package, which provides the core
+functionality for the Secret Santa application:
+
+- **process_names**: Processes a comma-separated string of names into a list
+- **shuffle_names**: Shuffles a list of names for random assignments
+
+The package is installed in the Docker container during the
+build process using the `pyproject.toml` file.
 
 ## 🔒 Security Features
 
