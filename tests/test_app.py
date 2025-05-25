@@ -1,6 +1,6 @@
 from random import seed
 
-from pysanta import process_names, shuffle_names
+from pysanta.core import process_names, shuffle_names
 
 
 def test_process_names_normal():
