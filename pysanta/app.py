@@ -1,6 +1,6 @@
 import marimo
 from typing import Tuple, Any
-from pysanta import process_names, shuffle_names
+
 
 __generated_with = "0.9.31"
 app = marimo.App()
@@ -30,6 +30,8 @@ def __input_names_a(mo: Any) -> Tuple[Any, Any]:
 
 @app.cell
 def __(mo: Any, names_A: Any, names_B: Any) -> None:
+    from core import process_names, shuffle_names
+
     aa = process_names(names_A.value)
     bb = process_names(names_B.value)
 

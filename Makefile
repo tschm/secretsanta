@@ -41,35 +41,27 @@ help:  ## Display this help screen
 
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
-marimo: install ## Install Marimo
-	@uv pip install --no-cache-dir  marimo
-	@uv run marimo edit app.py
-
-
-# Build the Jupyter Book documentation
-.PHONY: book
-book: install ## Compile the book
-	@uv pip install --no-cache-dir  jupyterlab jupyter-book
-	@uv run jupyter-book clean book
-	@uv run jupyter-book build book
+marimo: install    ## Install Marimo
+	#@uv pip install --no-cache-dir  marimo
+	@uv run marimo edit pysanta/app.py
 
 # Run the Marimo application
 .PHONY: app
 app: install ## Run the Marimo app
-	@uv pip install marimo
-	@uv run marimo run app.py
+	#@uv pip install marimo
+	@uv run marimo run pysanta/app.py
 
 # Build and run the Docker container for the application
 .PHONY: build
 build: ## Build and run Docker container
 	@docker build -f docker/Dockerfile -t marimo-app .
-	@docker run -it --rm -p 7860:7860 marimo-app
+	@docker run --rm -p 7860:7860 marimo-app
 
 # Run tests using pytest
 .PHONY: test
 test: install ## Run tests
 	@uv pip install --no-cache-dir pytest
-	@uv run pytest
+	@uv run pytest tests
 
 # Test the Docker container
 .PHONY: test-docker

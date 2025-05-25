@@ -2,9 +2,6 @@
 
 # Ignore Everything
 **
-
-!requirements.txt
-!app.py
 !pysanta
 
 **/__pycache__
