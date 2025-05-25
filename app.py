@@ -1,17 +1,19 @@
 import marimo
+from typing import Tuple, Any
+from pysanta import process_names, shuffle_names
 
 __generated_with = "0.9.31"
 app = marimo.App()
 
 
 @app.cell
-def __(mo):
+def __(mo: Any) -> None:
     mo.md(r"""# Secret Santa""")
     return
 
 
 @app.cell
-def __input_names_a(mo):
+def __input_names_a(mo: Any) -> Tuple[Any, Any]:
     names_A = mo.ui.text(placeholder="A,B,C...")
     names_B = mo.ui.text(placeholder="A,B,C...")
 
@@ -27,14 +29,12 @@ def __input_names_a(mo):
 
 
 @app.cell
-def __(mo, names_A, names_B):
-    from random import shuffle
+def __(mo: Any, names_A: Any, names_B: Any) -> None:
+    aa = process_names(names_A.value)
+    bb = process_names(names_B.value)
 
-    aa = list([name.strip() for name in names_A.value.split(",") if name.strip()])
-    bb = list([name.strip() for name in names_B.value.split(",") if name.strip()])
-
-    shuffle(aa)
-    shuffle(bb)
+    aa = shuffle_names(aa)
+    bb = shuffle_names(bb)
 
     mo.md(
         f"""
@@ -46,7 +46,7 @@ def __(mo, names_A, names_B):
 
 
 @app.cell
-def __():
+def __() -> Tuple[Any]:
     import marimo as mo
 
     return (mo,)

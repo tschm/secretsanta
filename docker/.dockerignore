@@ -5,6 +5,7 @@
 
 !requirements.txt
 !app.py
+!pysanta
 
 **/__pycache__
 **/*.pyc

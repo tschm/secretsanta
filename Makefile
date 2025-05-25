@@ -14,6 +14,7 @@ venv:
 install: venv ## Install a virtual environment
 	@uv pip install --upgrade pip
 	@uv pip install --no-cache-dir  -r requirements.txt
+	@uv pip install --no-cache-dir -e .
 
 
 # Format and lint the code using pre-commit
@@ -63,3 +64,15 @@ app: install ## Run the Marimo app
 build: ## Build and run Docker container
 	@docker build -f docker/Dockerfile -t marimo-app .
 	@docker run -it --rm -p 7860:7860 marimo-app
+
+# Run tests using pytest
+.PHONY: test
+test: install ## Run tests
+	@uv pip install --no-cache-dir pytest
+	@uv run pytest
+
+# Test the Docker container
+.PHONY: test-docker
+test-docker: ## Test Docker container build and functionality
+	@chmod +x docker/test_docker.sh
+	@cd $(CURDIR) && ./docker/test_docker.sh
