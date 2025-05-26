@@ -13,13 +13,13 @@ venv:
 .PHONY: install
 install: venv ## Install a virtual environment
 	@uv pip install --upgrade pip
-	@uv sync --dev --frozen  # Install dependencies from pyproject.toml with all extras
-
+	@uv pip install --no-cache-dir -r requirements.txt
 
 # Format and lint the code using pre-commit
 .PHONY: fmt
-fmt: venv ## Run autoformatting and linting
-	@uv pip install --no-cache-dir -e ".[dev]"
+fmt: install ## Run autoformatting and linting
+	#@uv pip install --no-cache-dir -e ".[dev]"
+	@uv run pip install --no-cache-dir pre-commit
 	@uv run pre-commit install
 	@uv run pre-commit run --all-files
 
@@ -41,12 +41,12 @@ help:  ## Display this help screen
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
 marimo: install    ## Install Marimo
-	@uv run marimo edit pysanta/app.py
+	@uv run marimo edit app.py
 
 # Run the Marimo application
 .PHONY: app
 app: install ## Run the Marimo app
-	@uv run marimo run pysanta/app.py
+	@uv run marimo run app.py
 
 # Run tests using pytest
 .PHONY: test
