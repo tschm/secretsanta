@@ -30,72 +30,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up Docker Buildx
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      # Build the Docker image
-      - name: Build Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./docker/Dockerfile
-          push: false
-          tags: marimo-app-test:latest
-          load: true
-
-      # Run the Docker container
-      - name: Run Docker container
+      # Test with script
+      - name: Test with script
         run: |
-          docker run -d --name secretsanta-test -p 7860:7860 marimo-app-test:latest
-
-      # Wait for container to initialize
-      - name: Wait for container to initialize
-        run: sleep 10
-
-      # Test HTTP connection
-      - name: Test HTTP connection
-        run: |
-          if ! curl -s -f http://localhost:7860/ > /dev/null; then
-            echo "HTTP connection failed"
-            docker logs secretsanta-test
-            exit 1
-          fi
-          echo "HTTP connection successful"
-
-      # Check container health
-      - name: Check container health
-        run: |
-          HEALTH_STATUS=$(docker inspect --format='{{.State.Health.Status}}' secretsanta-test)
-          if [ "$HEALTH_STATUS" != "healthy" ] && [ "$HEALTH_STATUS" != "starting" ]; then
-            echo "Container health check failed: $HEALTH_STATUS"
-            docker logs secretsanta-test
-            exit 1
-          fi
-          echo "Container health check passed: $HEALTH_STATUS"
-
-      # Check container user
-      - name: Check container user
-        run: |
-          CONTAINER_USER=$(docker exec secretsanta-test whoami)
-          if [ "$CONTAINER_USER" != "user" ]; then
-            echo "Container is running as unexpected user: $CONTAINER_USER"
-            exit 1
-          fi
-          echo "Container is running as the expected user: $CONTAINER_USER"
-
-      # Check marimo installation
-      - name: Check marimo installation
-        run: |
-          if ! docker exec secretsanta-test which marimo > /dev/null; then
-            echo "Marimo is not installed correctly"
-            exit 1
-          fi
-          echo "Marimo is installed correctly"
-
-      # Clean up
-      - name: Clean up
-        if: always()
-        run: |
-          docker stop secretsanta-test || true
-          docker rm secretsanta-test || true
+          # you have to be in the correct folder
+          cd docker
+          ./test_docker.sh
