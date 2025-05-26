@@ -34,17 +34,15 @@ ENV PATH="/home/user/.local/bin:$PATH" \
 # - chown user:user /app: Gives the new user ownership of the app directory
 RUN useradd -m -u 1000 user && mkdir /app && chown user:user /app
 
+# Set working directory and switch to user early
+# This sets the default directory for subsequent commands
+WORKDIR /app
+
 # Copy and install dependencies first for better caching
 # Docker caches layers, so putting dependency installation before code copy
 # means we don't reinstall dependencies when only the code changes
 # Note: We use the 'user' account created earlier for file ownership
-COPY --chown=user:user requirements.txt .
-RUN uv pip install --no-cache-dir -r requirements.txt && \
-    rm requirements.txt
-
-# Set working directory and switch to user early
-# This sets the default directory for subsequent commands
-WORKDIR /app
+RUN uv pip install --no-cache-dir marimo==13.11
 
 # Copy the pysanta package to the container
 # This contains the core functionality for the Secret Santa application
