@@ -42,7 +42,7 @@ WORKDIR /app
 # Docker caches layers, so putting dependency installation before code copy
 # means we don't reinstall dependencies when only the code changes
 # Note: We use the 'user' account created earlier for file ownership
-RUN uv pip install --no-cache-dir marimo==13.11
+RUN uv pip install --no-cache-dir marimo==0.13.11
 
 # Copy the pysanta package to the container
 # This contains the core functionality for the Secret Santa application
