@@ -16,13 +16,14 @@ participants from two different groups.
 - 🔄 Shuffle names for truly random assignments
 - 🖥️ Clean, interactive web interface
 - 🚀 Easy to use with simple text input
+- 📦 Modular design with the `pysanta` package
 
 ## 🚀 Getting Started
 
 ### 📋 Prerequisites
 
 - Python 3.10+
-- Marimo package (see `requirements.txt`)
+- Marimo package (installed automatically via `pyproject.toml`)
 
 ### 🔧 Installation
 
@@ -41,6 +42,32 @@ make install
 # Start the Marimo app
 make app
 ```
+
+## 📦 pysanta Package
+
+The application is built around the `pysanta` package, which provides the core functionality:
+
+- **process_names**: Processes a comma-separated string of names into a list
+- **shuffle_names**: Shuffles a list of names for random assignments
+
+The package is installed automatically when you run `make install` and
+is also included in the Docker container.
+
+### 🛠️ Development Setup
+
+The project uses a `pyproject.toml` file for package configuration
+and dependency management with `uv`. Development
+dependencies are available as optional dependencies:
+
+```bash
+# Install development dependencies
+uv pip install -e ".[dev]"
+```
+
+This will install:
+
+- **pre-commit**: For code quality checks
+- **pytest**: For running tests
 
 ## 🐳 Docker Support
 

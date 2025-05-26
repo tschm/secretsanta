@@ -13,14 +13,13 @@ venv:
 .PHONY: install
 install: venv ## Install a virtual environment
 	@uv pip install --upgrade pip
-	@uv pip install --no-cache-dir  -r requirements.txt
-	@uv pip install --no-cache-dir -e .
+	@uv pip install --no-cache-dir -r requirements.txt
 
 
 # Format and lint the code using pre-commit
 .PHONY: fmt
-fmt: venv ## Run autoformatting and linting
-	@uv pip install --no-cache-dir  pre-commit
+fmt: install ## Run autoformatting and linting
+	@uv run pip install --no-cache-dir pre-commit
 	@uv run pre-commit install
 	@uv run pre-commit run --all-files
 
@@ -42,29 +41,15 @@ help:  ## Display this help screen
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
 marimo: install    ## Install Marimo
-	#@uv pip install --no-cache-dir  marimo
-	@uv run marimo edit pysanta/app.py
+	@uv run marimo edit app.py
 
 # Run the Marimo application
 .PHONY: app
 app: install ## Run the Marimo app
-	#@uv pip install marimo
-	@uv run marimo run pysanta/app.py
-
-# Build and run the Docker container for the application
-.PHONY: build
-build: ## Build and run Docker container
-	@docker build -f docker/Dockerfile -t marimo-app .
-	@docker run --rm -p 7860:7860 marimo-app
+	@uv run marimo run app.py
 
 # Run tests using pytest
 .PHONY: test
 test: install ## Run tests
 	@uv pip install --no-cache-dir pytest
 	@uv run pytest tests
-
-# Test the Docker container
-.PHONY: test-docker
-test-docker: ## Test Docker container build and functionality
-	@chmod +x docker/test_docker.sh
-	@cd $(CURDIR) && ./docker/test_docker.sh

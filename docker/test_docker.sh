@@ -13,7 +13,7 @@ echo "🔍 Testing Dockerfile in secretsanta..."
 
 # Step 1: Build the Docker image
 echo "🏗️  Building Docker image..."
-docker build -f docker/Dockerfile -t marimo-app-test .
+docker build -f Dockerfile -t marimo-app-test ..
 
 # Step 2: Run the container in detached mode
 echo "🚀 Starting container..."
@@ -83,14 +83,6 @@ else
     docker rm $TEST_CONTAINER_NAME
     exit 1
 fi
-
-# Step 9: Run the app
-echo "🚀 Checking if app.py can be executed with marimo..."
-# Skip this test since we've already verified that marimo is installed and the app is accessible via HTTP
-echo -e "${GREEN}✅ app.py is accessible via HTTP, which means it's executing correctly${NC}"
-
-
-
 
 # Clean up
 echo "🧹 Cleaning up..."
