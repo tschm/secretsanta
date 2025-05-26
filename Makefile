@@ -15,10 +15,10 @@ install: venv ## Install a virtual environment
 	@uv pip install --upgrade pip
 	@uv pip install --no-cache-dir -r requirements.txt
 
+
 # Format and lint the code using pre-commit
 .PHONY: fmt
 fmt: install ## Run autoformatting and linting
-	#@uv pip install --no-cache-dir -e ".[dev]"
 	@uv run pip install --no-cache-dir pre-commit
 	@uv run pre-commit install
 	@uv run pre-commit run --all-files
