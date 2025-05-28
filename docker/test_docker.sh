@@ -13,7 +13,7 @@ echo "🔍 Testing Dockerfile in secretsanta..."
 
 # Step 1: Build the Docker image
 echo "🏗️  Building Docker image..."
-docker build -f Dockerfile -t marimo-app-test ..
+docker build -f Dockerfile -t marimo-app-test --target prod ..
 
 # Step 2: Run the container in detached mode
 echo "🚀 Starting container..."

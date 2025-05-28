@@ -4,7 +4,7 @@
 
 # Use a more specific Python slim image to reduce size
 # The slim variant contains only essential packages, resulting in a smaller image size
-FROM python:3.13-slim
+FROM python:3.13-slim AS base
 
 # Install uv for fast package management
 # uv is a Python package installer that's significantly faster than pip
@@ -46,11 +46,14 @@ RUN uv pip install --no-cache-dir marimo==0.13.11
 
 # Copy the pysanta package to the container
 # This contains the core functionality for the Secret Santa application
-COPY --chown=user:user ./pysanta pysanta
+COPY --chown=user:user ./pysanta pysanta/
 
 # Copy application code
 # The main app.py file contains the Marimo application entry point
 COPY --chown=user:user app.py app.py
+
+
+FROM base as prod
 
 # Switch to non-root user
 # This is a security best practice to limit the potential damage if the container is compromised
@@ -80,3 +83,15 @@ ENTRYPOINT ["marimo"]
 # - --host 0.0.0.0: Binds to all network interfaces (required for container access)
 # - --port 7860: The port the application listens on
 CMD ["run", "app.py", "--host", "0.0.0.0", "--port", "7860"]
+
+FROM base as test
+
+# Copy tests
+COPY --chown=user:user tests /app/tests
+
+RUN uv pip install --no-cache-dir -r /app/tests/requirements.txt && \
+    ls -all
+
+USER user
+
+ENTRYPOINT ["pytest"]

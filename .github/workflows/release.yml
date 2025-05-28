@@ -46,12 +46,28 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      # Build and push the Docker image with the new tag
-      - name: Build and Push Docker Image
-        uses: tschm/cradle/actions/docker@v0.1.68
+      - name: Log in to GitHub Container Registry
+        uses: redhat-actions/podman-login@v1
         with:
-          github_repository: ${{ github.repository }}  # Repository to build the image for
-          tag: ${{ needs.tagging.outputs.new_tag }}    # Tag from the tagging job
-          github_token: ${{ secrets.GITHUB_TOKEN }}    # Token for authentication
-          github_actor: ${{ github.actor }}            # Current user
-          dockerfiles: 'docker/Dockerfile'             # Path to the Dockerfile
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: 'ghcr.io'
+
+      - name: Build image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: tschm/secretsanta
+          tags: ${{ needs.tagging.outputs.new_tag }}
+          containerfiles: |
+            docker/Dockerfile
+          extra-args: |
+            --target prod
+
+      - name: Push to ghcr.io
+        id: push-to-ghcr
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ needs.tagging.outputs.new_tag }}
+          registry: 'ghcr.io'
