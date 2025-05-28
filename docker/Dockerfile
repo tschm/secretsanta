@@ -84,7 +84,7 @@ ENTRYPOINT ["marimo"]
 # - --port 7860: The port the application listens on
 CMD ["run", "app.py", "--host", "0.0.0.0", "--port", "7860"]
 
-FROM base as Test
+FROM base as test
 
 # Copy tests
 COPY --chown=user:user tests /app/tests
