@@ -46,7 +46,7 @@ RUN uv pip install --no-cache-dir marimo==0.13.11
 
 # Copy the pysanta package to the container
 # This contains the core functionality for the Secret Santa application
-COPY --chown=user:user ./pysanta pysanta
+COPY --chown=user:user ./pysanta pysanta/
 
 # Copy application code
 # The main app.py file contains the Marimo application entry point
