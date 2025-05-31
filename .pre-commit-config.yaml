@@ -35,8 +35,3 @@ repos:
     hooks:
       - id: check-renovate
         args: [ "--verbose" ]
-
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
-    hooks:
-      - id: hadolint-docker
