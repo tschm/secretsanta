@@ -34,14 +34,14 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.69
+      #- name: "Build the virtual environment for ${{ github.repository }}"
+      #  uses: tschm/cradle/actions/environment@v0.1.69
 
       - name: Convert notebook to HTML
         run: |
-          @uv run pip install marimo
+          @pip install marimo==0.13.10
           @mkdir -p artifacts/marimo
-          @uv run marimo export html app.py -o artifacts/marimo/index.html
+          @marimo export html app.py -o artifacts/marimo/index.html
 
       - name: GitHub Pages action
         uses: JamesIves/github-pages-deploy-action@v4
