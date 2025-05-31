@@ -48,8 +48,9 @@ marimo: install    ## Install Marimo
 app: install ## Run the Marimo app
 	@uv run marimo run app.py
 
-# Run tests using pytest
-.PHONY: test
-test: install ## Run tests
-	@uv pip install --no-cache-dir pytest
-	@uv run pytest tests
+
+.PHONY: slides
+slides: install
+	@uv run marimo export html app.py -o app.html
+#.PHONY: slides
+#slides: install ## Present your slides
