@@ -16,9 +16,6 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     # Commented out container configuration (alternative execution environment)
-    #container:
-    #  image: ghcr.io/tschm/cradle:latest
-
     steps:
       # Check out the repository code
       - name: Checkout [${{ github.repository }}]
