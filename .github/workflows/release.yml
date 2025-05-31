@@ -29,45 +29,22 @@ jobs:
         run: |
             echo "Tag: ${{ steps.tag_version.outputs.new_tag }}"
 
-  # Job to build and push a Docker image with the new version tag
-  docker:
-    # This job depends on the tagging job
-    needs: tagging
-    # Permissions to read repository contents and write to GitHub Packages
+  page:
     permissions:
-      contents: read
-      packages: write
-
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      # -----------------------------------------------------------------------------
-      # Step 1: Checkout the repository
-      # -----------------------------------------------------------------------------
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
+      - name: "Build the virtual environment for ${{ github.repository }}"
+        uses: tschm/cradle/actions/environment@v0.1.69
 
-      - name: Log in to GitHub Container Registry
-        uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: 'ghcr.io'
+      - uses: Convert notebook to HTML
+        run: |
+          @uv run pip install marimo
+          @mkdir -p artifacts/marimo
+          @uv run marimo export html app.py -o artifacts/marimo/index.html
 
-      - name: Build image
-        id: build-image
-        uses: redhat-actions/buildah-build@v2
+      - name: GitHub Pages action
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          image: tschm/secretsanta
-          tags: ${{ needs.tagging.outputs.new_tag }}
-          containerfiles: |
-            docker/Dockerfile
-          extra-args: |
-            --target prod
-
-      - name: Push to ghcr.io
-        id: push-to-ghcr
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: ${{ needs.tagging.outputs.new_tag }}
-          registry: 'ghcr.io'
+          branch: gh-pages            # The branch the action should deploy to.
+          folder: artifacts/marimo               # The folder the action should deploy.
