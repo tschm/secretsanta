@@ -3,4 +3,4 @@
 *.pyc
 __pycache__
 __marimo__
-pysanta.egg-info
+app.html
