@@ -2,7 +2,6 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/secretsanta/badge)](https://www.codefactor.io/repository/github/tschm/secretsanta)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://github.com/renovatebot/renovate)
-[![Docker Test](https://github.com/tschm/secretsanta/actions/workflows/docker-test.yml/badge.svg)](https://github.com/tschm/secretsanta/actions/workflows/docker-test.yml)
 
 ## 🎁 About
 
