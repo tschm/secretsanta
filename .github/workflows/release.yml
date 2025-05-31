@@ -30,12 +30,23 @@ jobs:
             echo "Tag: ${{ steps.tag_version.outputs.new_tag }}"
 
   page:
+    needs: tagging
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      #- name: "Build the virtual environment for ${{ github.repository }}"
-      #  uses: tschm/cradle/actions/environment@v0.1.69
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Convert notebook to HTML
+        run: |
+          uv run pip install marimo
+          mkdir -p artifacts/marimo
+          uv run marimo export html app.py -o artifacts/marimo/index.html
 
       - name: Convert notebook to HTML
         run: |
@@ -47,4 +58,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages            # The branch the action should deploy to.
-          folder: artifacts/marimo               # The folder the action should deploy.
+          folder: artifacts/marimo    # The folder the action should deploy.
