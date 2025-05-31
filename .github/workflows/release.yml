@@ -37,7 +37,7 @@ jobs:
       - name: "Build the virtual environment for ${{ github.repository }}"
         uses: tschm/cradle/actions/environment@v0.1.69
 
-      - uses: Convert notebook to HTML
+      - name: Convert notebook to HTML
         run: |
           @uv run pip install marimo
           @mkdir -p artifacts/marimo
