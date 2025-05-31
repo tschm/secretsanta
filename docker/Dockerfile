@@ -42,11 +42,7 @@ WORKDIR /app
 # Docker caches layers, so putting dependency installation before code copy
 # means we don't reinstall dependencies when only the code changes
 # Note: We use the 'user' account created earlier for file ownership
-RUN uv pip install --no-cache-dir marimo==0.13.11
-
-# Copy the pysanta package to the container
-# This contains the core functionality for the Secret Santa application
-COPY --chown=user:user ./pysanta pysanta/
+RUN uv pip install --no-cache-dir marimo==0.13.15
 
 # Copy application code
 # The main app.py file contains the Marimo application entry point
@@ -83,15 +79,3 @@ ENTRYPOINT ["marimo"]
 # - --host 0.0.0.0: Binds to all network interfaces (required for container access)
 # - --port 7860: The port the application listens on
 CMD ["run", "app.py", "--host", "0.0.0.0", "--port", "7860"]
-
-FROM base as test
-
-# Copy tests
-COPY --chown=user:user tests /app/tests
-
-RUN uv pip install --no-cache-dir -r /app/tests/requirements.txt && \
-    ls -all
-
-USER user
-
-ENTRYPOINT ["pytest"]
