@@ -48,12 +48,6 @@ jobs:
           mkdir -p artifacts/marimo
           uv run marimo export html app.py -o artifacts/marimo/index.html
 
-      - name: Convert notebook to HTML
-        run: |
-          @pip install marimo==0.13.10
-          @mkdir -p artifacts/marimo
-          @marimo export html app.py -o artifacts/marimo/index.html
-
       - name: GitHub Pages action
         uses: JamesIves/github-pages-deploy-action@v4
         with:
