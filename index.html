@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/apple-touch-icon.png" />
+    <link rel="manifest" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>app.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.13.15' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"cell_output": "above", "code_editor_font_size": 14, "dataframes": "rich", "default_table_page_size": 10, "default_width": "medium", "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": true}}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "after_delay", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"sql_output": "auto", "width": "compact"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='static' hidden></marimo-server-token>
+    <title>app</title>
+    <script type="module" crossorigin crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/index-aRpq2G87.js"></script>
+    <link rel="stylesheet" crossorigin crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist/assets/index-BqXWXM9d.css">
+  
+<script data-marimo="true">
+    window.__MARIMO_STATIC__ = {};
+    window.__MARIMO_STATIC__.version = "0.13.15";
+    window.__MARIMO_STATIC__.notebookState = {"cellIds": ["Hbol", "MJUe", "vblA", "bkHC", "lEQa"], "cellNames": ["Xw==", "Xw==", "X19pbnB1dF9uYW1lc19h", "Xw==", "Xw=="], "cellCodes": ["ZnJvbSUyMHJhbmRvbSUyMGltcG9ydCUyMHNodWZmbGUlMjBhcyUyMHJhbmRvbV9zaHVmZmxlJTBBZnJvbSUyMHR5cGluZyUyMGltcG9ydCUyMExpc3QlMEElMEFkZWYlMjBwcm9jZXNzX25hbWVzKG5hbWVzX3N0ciUzQSUyMHN0ciklMjAtJTNFJTIwTGlzdCU1QnN0ciU1RCUzQSUwQSUyMCUyMCUyMCUyMCUyMiUyMiUyMlByb2Nlc3MlMjBhJTIwY29tbWEtc2VwYXJhdGVkJTIwc3RyaW5nJTIwb2YlMjBuYW1lcyUyMGludG8lMjBhJTIwbGlzdC4lMEElMEElMjAlMjAlMjAlMjBBcmdzJTNBJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwbmFtZXNfc3RyJTIwKHN0ciklM0ElMjBDb21tYS1zZXBhcmF0ZWQlMjBzdHJpbmclMjBvZiUyMG5hbWVzJTBBJTBBJTIwJTIwJTIwJTIwUmV0dXJucyUzQSUwQSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMGxpc3QlM0ElMjBMaXN0JTIwb2YlMjBzdHJpcHBlZCUyMG5hbWVzJTIwd2l0aCUyMGVtcHR5JTIwZW50cmllcyUyMHJlbW92ZWQlMEElMjAlMjAlMjAlMjAlMjIlMjIlMjIlMEElMjAlMjAlMjAlMjByZXR1cm4lMjAlNUJuYW1lLnN0cmlwKCklMjBmb3IlMjBuYW1lJTIwaW4lMjBuYW1lc19zdHIuc3BsaXQoJTIyJTJDJTIyKSUyMGlmJTIwbmFtZS5zdHJpcCgpJTVEJTBBJTBBZGVmJTIwc2h1ZmZsZV9uYW1lcyhuYW1lc19saXN0JTNBJTIwTGlzdCU1QnN0ciU1RCklMjAtJTNFJTIwTGlzdCU1QnN0ciU1RCUzQSUwQSUyMCUyMCUyMCUyMCUyMiUyMiUyMlNodWZmbGUlMjBhJTIwbGlzdCUyMG9mJTIwbmFtZXMuJTBBJTBBJTIwJTIwJTIwJTIwQXJncyUzQSUwQSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMG5hbWVzX2xpc3QlMjAobGlzdCklM0ElMjBMaXN0JTIwb2YlMjBuYW1lcyUyMHRvJTIwc2h1ZmZsZSUwQSUwQSUyMCUyMCUyMCUyMFJldHVybnMlM0ElMEElMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBsaXN0JTNBJTIwU2h1ZmZsZWQlMjBsaXN0JTIwb2YlMjBuYW1lcyUwQSUyMCUyMCUyMCUyMCUyMiUyMiUyMiUwQSUyMCUyMCUyMCUyMCUyMyUyMENyZWF0ZSUyMGElMjBjb3B5JTIwdG8lMjBhdm9pZCUyMG1vZGlmeWluZyUyMHRoZSUyMG9yaWdpbmFsJTBBJTIwJTIwJTIwJTIwcmVzdWx0JTIwJTNEJTIwbmFtZXNfbGlzdC5jb3B5KCklMEElMjAlMjAlMjAlMjByYW5kb21fc2h1ZmZsZShyZXN1bHQpJTBBJTIwJTIwJTIwJTIwcmV0dXJuJTIwcmVzdWx0JTBB", "bW8ubWQociUyMiUyMiUyMiUyMyUyMFNlY3JldCUyMFNhbnRhJTIyJTIyJTIyKQ==", "bmFtZXNfQSUyMCUzRCUyMG1vLnVpLnRleHQocGxhY2Vob2xkZXIlM0QlMjJBJTJDQiUyQ0MuLi4lMjIpJTBBbmFtZXNfQiUyMCUzRCUyMG1vLnVpLnRleHQocGxhY2Vob2xkZXIlM0QlMjJBJTJDQiUyQ0MuLi4lMjIpJTBBJTBBJTIzJTIwQ3JlYXRlJTIwc2h1ZmZsZSUyMGJ1dHRvbiUyMHdpdGglMjBjb25kaXRpb25hbCUyMGVuYWJsaW5nJTBBbW8ubWQoJTBBJTIwJTIwJTIwJTIwZiUyMiUyMiUyMiUwQSUyMCUyMCUyMCUyMEVudGVyJTIwYSUyMGNvbW1hLXNlcGFyYXRlZCUyMGxpc3QlMjBvZiUyMG5hbWVzJTIwZm9yJTIwdGhlJTIwMXN0JTIwZ3JvdXAlM0ElMjAlN0JuYW1lc19BJTdEJTBBJTBBJTIwJTIwJTIwJTIwRW50ZXIlMjBhJTIwY29tbWEtc2VwYXJhdGVkJTIwbGlzdCUyMG9mJTIwbmFtZXMlMjBmb3IlMjB0aGUlMjAybmQlMjBncm91cCUzQSUyMCU3Qm5hbWVzX0IlN0QlMEElMjAlMjAlMjAlMjAlMjIlMjIlMjIlMEEp", "YWElMjAlM0QlMjBwcm9jZXNzX25hbWVzKG5hbWVzX0EudmFsdWUpJTBBYmIlMjAlM0QlMjBwcm9jZXNzX25hbWVzKG5hbWVzX0IudmFsdWUpJTBBJTBBYWElMjAlM0QlMjBzaHVmZmxlX25hbWVzKGFhKSUwQWJiJTIwJTNEJTIwc2h1ZmZsZV9uYW1lcyhiYiklMEElMEFtby5tZCglMEElMjAlMjAlMjAlMjBmJTIyJTIyJTIyJTBBJTIwJTIwJTIwJTIwU2h1ZmZsZWQlMjAxc3QlMjBncm91cCUzQSUyMCU3QmFhJTdEJTBBJTBBJTIwJTIwJTIwJTIwU2h1ZmZsZWQlMjAybmQlMjBncm91cCUzQSUyMCU3QmJiJTdEJTBBJTIwJTIwJTIwJTIwJTIyJTIyJTIyJTBBKQ==", "aW1wb3J0JTIwbWFyaW1vJTIwYXMlMjBtbyUwQQ=="], "cellConfigs": ["JTdCJTIyY29sdW1uJTIyJTNBJTIwbnVsbCUyQyUyMCUyMmRpc2FibGVkJTIyJTNBJTIwZmFsc2UlMkMlMjAlMjJoaWRlX2NvZGUlMjIlM0ElMjBmYWxzZSU3RA==", "JTdCJTIyY29sdW1uJTIyJTNBJTIwbnVsbCUyQyUyMCUyMmRpc2FibGVkJTIyJTNBJTIwZmFsc2UlMkMlMjAlMjJoaWRlX2NvZGUlMjIlM0ElMjBmYWxzZSU3RA==", "JTdCJTIyY29sdW1uJTIyJTNBJTIwbnVsbCUyQyUyMCUyMmRpc2FibGVkJTIyJTNBJTIwZmFsc2UlMkMlMjAlMjJoaWRlX2NvZGUlMjIlM0ElMjBmYWxzZSU3RA==", "JTdCJTIyY29sdW1uJTIyJTNBJTIwbnVsbCUyQyUyMCUyMmRpc2FibGVkJTIyJTNBJTIwZmFsc2UlMkMlMjAlMjJoaWRlX2NvZGUlMjIlM0ElMjBmYWxzZSU3RA==", "JTdCJTIyY29sdW1uJTIyJTNBJTIwbnVsbCUyQyUyMCUyMmRpc2FibGVkJTIyJTNBJTIwZmFsc2UlMkMlMjAlMjJoaWRlX2NvZGUlMjIlM0ElMjBmYWxzZSU3RA=="], "cellOutputs": {"Hbol": "JTdCJTIyY2hhbm5lbCUyMiUzQSUyMCUyMm91dHB1dCUyMiUyQyUyMCUyMm1pbWV0eXBlJTIyJTNBJTIwJTIydGV4dCUyRnBsYWluJTIyJTJDJTIwJTIyZGF0YSUyMiUzQSUyMCUyMiUyMiUyQyUyMCUyMnRpbWVzdGFtcCUyMiUzQSUyMDE3NDg2OTM2MDIuMzYzMjU1NyU3RA==", "MJUe": "JTdCJTIyY2hhbm5lbCUyMiUzQSUyMCUyMm91dHB1dCUyMiUyQyUyMCUyMm1pbWV0eXBlJTIyJTNBJTIwJTIydGV4dCUyRmh0bWwlMjIlMkMlMjAlMjJkYXRhJTIyJTNBJTIwJTIyJTNDc3BhbiUyMGNsYXNzJTNEJTVDJTIybWFya2Rvd24lMjBwcm9zZSUyMGRhcmslM0Fwcm9zZS1pbnZlcnQlNUMlMjIlM0UlM0NoMSUyMGlkJTNEJTVDJTIyc2VjcmV0LXNhbnRhJTVDJTIyJTNFU2VjcmV0JTIwU2FudGElM0MlMkZoMSUzRSUzQyUyRnNwYW4lM0UlMjIlMkMlMjAlMjJ0aW1lc3RhbXAlMjIlM0ElMjAxNzQ4NjkzNjAyLjQyNTc4NDMlN0Q=", "vblA": "JTdCJTIyY2hhbm5lbCUyMiUzQSUyMCUyMm91dHB1dCUyMiUyQyUyMCUyMm1pbWV0eXBlJTIyJTNBJTIwJTIydGV4dCUyRmh0bWwlMjIlMkMlMjAlMjJkYXRhJTIyJTNBJTIwJTIyJTNDc3BhbiUyMGNsYXNzJTNEJTVDJTIybWFya2Rvd24lMjBwcm9zZSUyMGRhcmslM0Fwcm9zZS1pbnZlcnQlNUMlMjIlM0UlM0NzcGFuJTIwY2xhc3MlM0QlNUMlMjJwYXJhZ3JhcGglNUMlMjIlM0VFbnRlciUyMGElMjBjb21tYS1zZXBhcmF0ZWQlMjBsaXN0JTIwb2YlMjBuYW1lcyUyMGZvciUyMHRoZSUyMDFzdCUyMGdyb3VwJTNBJTIwJTNDbWFyaW1vLXVpLWVsZW1lbnQlMjBvYmplY3QtaWQlM0QndmJsQS0wJyUyMHJhbmRvbS1pZCUzRCdjYWI2MTU0My0zNjIxLTY1OWMtNzlmMS0xZDM2YWE2YTliODUnJTNFJTNDbWFyaW1vLXRleHQlMjBkYXRhLWluaXRpYWwtdmFsdWUlM0QnJTI2cXVvdCUzQiUyNnF1b3QlM0InJTIwZGF0YS1sYWJlbCUzRCdudWxsJyUyMGRhdGEtcGxhY2Vob2xkZXIlM0QnJTI2cXVvdCUzQkElMkNCJTJDQy4uLiUyNnF1b3QlM0InJTIwZGF0YS1raW5kJTNEJyUyNnF1b3QlM0J0ZXh0JTI2cXVvdCUzQiclMjBkYXRhLWZ1bGwtd2lkdGglM0QnZmFsc2UnJTIwZGF0YS1kaXNhYmxlZCUzRCdmYWxzZSclMjBkYXRhLWRlYm91bmNlJTNEJ3RydWUnJTNFJTNDJTJGbWFyaW1vLXRleHQlM0UlM0MlMkZtYXJpbW8tdWktZWxlbWVudCUzRSUzQyUyRnNwYW4lM0UlNUNuJTNDc3BhbiUyMGNsYXNzJTNEJTVDJTIycGFyYWdyYXBoJTVDJTIyJTNFRW50ZXIlMjBhJTIwY29tbWEtc2VwYXJhdGVkJTIwbGlzdCUyMG9mJTIwbmFtZXMlMjBmb3IlMjB0aGUlMjAybmQlMjBncm91cCUzQSUyMCUzQ21hcmltby11aS1lbGVtZW50JTIwb2JqZWN0LWlkJTNEJ3ZibEEtMSclMjByYW5kb20taWQlM0QnMzUzYTc3NTctNjI3OS0yYzA4LTU5MjItOTFlZWUxMzhlMzViJyUzRSUzQ21hcmltby10ZXh0JTIwZGF0YS1pbml0aWFsLXZhbHVlJTNEJyUyNnF1b3QlM0IlMjZxdW90JTNCJyUyMGRhdGEtbGFiZWwlM0QnbnVsbCclMjBkYXRhLXBsYWNlaG9sZGVyJTNEJyUyNnF1b3QlM0JBJTJDQiUyQ0MuLi4lMjZxdW90JTNCJyUyMGRhdGEta2luZCUzRCclMjZxdW90JTNCdGV4dCUyNnF1b3QlM0InJTIwZGF0YS1mdWxsLXdpZHRoJTNEJ2ZhbHNlJyUyMGRhdGEtZGlzYWJsZWQlM0QnZmFsc2UnJTIwZGF0YS1kZWJvdW5jZSUzRCd0cnVlJyUzRSUzQyUyRm1hcmltby10ZXh0JTNFJTNDJTJGbWFyaW1vLXVpLWVsZW1lbnQlM0UlM0MlMkZzcGFuJTNFJTNDJTJGc3BhbiUzRSUyMiUyQyUyMCUyMnRpbWVzdGFtcCUyMiUzQSUyMDE3NDg2OTM2MDIuNDMzNzEzNyU3RA==", "bkHC": "JTdCJTIyY2hhbm5lbCUyMiUzQSUyMCUyMm91dHB1dCUyMiUyQyUyMCUyMm1pbWV0eXBlJTIyJTNBJTIwJTIydGV4dCUyRmh0bWwlMjIlMkMlMjAlMjJkYXRhJTIyJTNBJTIwJTIyJTNDc3BhbiUyMGNsYXNzJTNEJTVDJTIybWFya2Rvd24lMjBwcm9zZSUyMGRhcmslM0Fwcm9zZS1pbnZlcnQlNUMlMjIlM0UlM0NzcGFuJTIwY2xhc3MlM0QlNUMlMjJwYXJhZ3JhcGglNUMlMjIlM0VTaHVmZmxlZCUyMDFzdCUyMGdyb3VwJTNBJTIwJTVCJTVEJTNDJTJGc3BhbiUzRSU1Q24lM0NzcGFuJTIwY2xhc3MlM0QlNUMlMjJwYXJhZ3JhcGglNUMlMjIlM0VTaHVmZmxlZCUyMDJuZCUyMGdyb3VwJTNBJTIwJTVCJTVEJTNDJTJGc3BhbiUzRSUzQyUyRnNwYW4lM0UlMjIlMkMlMjAlMjJ0aW1lc3RhbXAlMjIlM0ElMjAxNzQ4NjkzNjAyLjQ0MDM4NiU3RA==", "lEQa": "JTdCJTIyY2hhbm5lbCUyMiUzQSUyMCUyMm91dHB1dCUyMiUyQyUyMCUyMm1pbWV0eXBlJTIyJTNBJTIwJTIydGV4dCUyRnBsYWluJTIyJTJDJTIwJTIyZGF0YSUyMiUzQSUyMCUyMiUyMiUyQyUyMCUyMnRpbWVzdGFtcCUyMiUzQSUyMDE3NDg2OTM2MDIuMzY0MjI4NyU3RA=="}, "cellConsoleOutputs": {}};
+    window.__MARIMO_STATIC__.assetUrl = "https://cdn.jsdelivr.net/npm/@marimo-team/frontend@0.13.15/dist";
+    window.__MARIMO_STATIC__.files = {};
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  
+<marimo-code hidden="">
+    import%20marimo%0A%0A__generated_with%20%3D%20%220.13.15%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20random%20import%20shuffle%20as%20random_shuffle%0A%20%20%20%20from%20typing%20import%20List%0A%0A%20%20%20%20def%20process_names(names_str%3A%20str)%20-%3E%20List%5Bstr%5D%3A%0A%20%20%20%20%20%20%20%20%22%22%22Process%20a%20comma-separated%20string%20of%20names%20into%20a%20list.%0A%0A%20%20%20%20%20%20%20%20Args%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20names_str%20(str)%3A%20Comma-separated%20string%20of%20names%0A%0A%20%20%20%20%20%20%20%20Returns%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20list%3A%20List%20of%20stripped%20names%20with%20empty%20entries%20removed%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20return%20%5Bname.strip()%20for%20name%20in%20names_str.split(%22%2C%22)%20if%20name.strip()%5D%0A%0A%20%20%20%20def%20shuffle_names(names_list%3A%20List%5Bstr%5D)%20-%3E%20List%5Bstr%5D%3A%0A%20%20%20%20%20%20%20%20%22%22%22Shuffle%20a%20list%20of%20names.%0A%0A%20%20%20%20%20%20%20%20Args%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20names_list%20(list)%3A%20List%20of%20names%20to%20shuffle%0A%0A%20%20%20%20%20%20%20%20Returns%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20list%3A%20Shuffled%20list%20of%20names%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%23%20Create%20a%20copy%20to%20avoid%20modifying%20the%20original%0A%20%20%20%20%20%20%20%20result%20%3D%20names_list.copy()%0A%20%20%20%20%20%20%20%20random_shuffle(result)%0A%20%20%20%20%20%20%20%20return%20result%0A%0A%20%20%20%20return%20process_names%2C%20shuffle_names%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%23%20Secret%20Santa%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20__input_names_a(mo)%3A%0A%20%20%20%20names_A%20%3D%20mo.ui.text(placeholder%3D%22A%2CB%2CC...%22)%0A%20%20%20%20names_B%20%3D%20mo.ui.text(placeholder%3D%22A%2CB%2CC...%22)%0A%0A%20%20%20%20%23%20Create%20shuffle%20button%20with%20conditional%20enabling%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20Enter%20a%20comma-separated%20list%20of%20names%20for%20the%201st%20group%3A%20%7Bnames_A%7D%0A%0A%20%20%20%20%20%20%20%20Enter%20a%20comma-separated%20list%20of%20names%20for%20the%202nd%20group%3A%20%7Bnames_B%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%20names_A%2C%20names_B%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20names_A%2C%20names_B%2C%20process_names%2C%20shuffle_names)%3A%0A%20%20%20%20aa%20%3D%20process_names(names_A.value)%0A%20%20%20%20bb%20%3D%20process_names(names_B.value)%0A%0A%20%20%20%20aa%20%3D%20shuffle_names(aa)%0A%20%20%20%20bb%20%3D%20shuffle_names(bb)%0A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20Shuffled%201st%20group%3A%20%7Baa%7D%0A%0A%20%20%20%20%20%20%20%20Shuffled%202nd%20group%3A%20%7Bbb%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A
+</marimo-code>
+
+<marimo-code-hash hidden="">179567a01da235ab39e670bdeb7c8b7dc0c997c3645e6f5e6d3ec1be181963f2</marimo-code-hash>
+</body>
+</html>
