@@ -1,76 +1,95 @@
-# Workflow for creating a new version release and building a Docker image
-# This workflow is manually triggered to create a new version tag and build a Docker image
+# Workflow for creating a new version release and deploying to GitHub Pages
+# This workflow is manually triggered to:
+# 1. Create a new version tag using semantic versioning
+# 2. Convert the Marimo notebook to HTML
+# 3. Deploy the HTML to GitHub Pages
 
 name: Bump version
 
 # Trigger the workflow manually using the GitHub Actions UI
+# This allows controlled releases when needed rather than on every push
 on:
   workflow_dispatch
 
 jobs:
-  # Job to generate a new version tag
+  # Job to generate a new version tag based on semantic versioning
+  # This creates a new git tag with an incremented version number
   tagging:
-    # Permission to write to repository contents (create tags)
+    # Permission to write to repository contents (needed to create tags)
     permissions:
       contents: write
     runs-on: ubuntu-latest
     outputs:
-      new_tag: ${{ steps.tag_version.outputs.new_tag }}  # This will output the tag for other jobs
+      # This output variable makes the tag available to other jobs in the workflow
+      new_tag: ${{ steps.tag_version.outputs.new_tag }}
     steps:
-      # Generate a new version tag based on semantic versioning
+      # Use the cradle/actions/tag action to generate a semantic version tag
+      # This automatically determines the next version number based on commit messages
       - name: Generate Tag
         id: tag_version
         uses: tschm/cradle/actions/tag@v0.1.69
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Output the generated tag for debugging purposes
+      # Output the generated tag for debugging and verification purposes
       - name: Debug Output Tag
         run: |
             echo "Tag: ${{ steps.tag_version.outputs.new_tag }}"
 
+  # Job to build the HTML page from the Marimo notebook
+  # This job converts the app.py Marimo notebook to HTML and prepares it for deployment
   page:
+    # This job depends on the tagging job completing successfully
     needs: tagging
     permissions:
-      contents: write
+      contents: write  # Permission to read repository contents
     runs-on: ubuntu-latest
     steps:
+      # Check out the repository code to access the Marimo notebook
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
+      # Install the uv package manager for Python dependency management
+      # uv is a fast, reliable Python package installer and resolver
       - name: Install uv
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
+      # Convert the Marimo notebook (app.py) to a static HTML file
+      # This creates a standalone HTML page that can be deployed to GitHub Pages
       - name: Convert notebook to HTML
         run: |
           uv run pip install --no-cache-dir marimo
           mkdir -p artifacts/marimo
           uv run marimo export html app.py -o artifacts/marimo/index.html
 
+      # Upload the generated HTML files as a GitHub Actions artifact
+      # This makes the files available for the deployment job
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: artifacts/
+          path: artifacts/marimo
 
 
-  # Job to deploy the built book to GitHub Pages
+  # Job to deploy the built HTML to GitHub Pages
+  # This job takes the artifact from the page job and deploys it to GitHub Pages
   deploy-book:
     runs-on: ubuntu-latest
-    # This job depends on both jupyter and marimo jobs completing successfully
+    # This job depends on the page job completing successfully
     needs: page
-    # Need write permission to push to gh-pages branch
+    # Need specific permissions for GitHub Pages deployment
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write      # Permission to deploy to Pages
+      id-token: write   # Permission to verify deployment origin
 
-    # Deploy to the github-pages environment
+    # Configure the deployment environment
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}  # URL will be available after deployment
 
     steps:
+      # Deploy the artifact to GitHub Pages using GitHub's official action
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
