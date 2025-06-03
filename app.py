@@ -7,9 +7,8 @@ app = marimo.App()
 @app.cell
 def _():
     from random import shuffle as random_shuffle
-    from typing import List
 
-    def process_names(names_str: str) -> List[str]:
+    def process_names(names_str: str) -> list[str]:
         """Process a comma-separated string of names into a list.
 
         Args:
@@ -20,7 +19,7 @@ def _():
         """
         return [name.strip() for name in names_str.split(",") if name.strip()]
 
-    def shuffle_names(names_list: List[str]) -> List[str]:
+    def shuffle_names(names_list: list[str]) -> list[str]:
         """Shuffle a list of names.
 
         Args:

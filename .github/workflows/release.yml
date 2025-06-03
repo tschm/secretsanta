@@ -44,12 +44,33 @@ jobs:
 
       - name: Convert notebook to HTML
         run: |
-          uv run pip install marimo
+          uv run pip install --no-cache-dir marimo
           mkdir -p artifacts/marimo
           uv run marimo export html app.py -o artifacts/marimo/index.html
 
-      - name: GitHub Pages action
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload HTML artifacts
+        uses: actions/upload-artifact@v4
         with:
-          branch: gh-pages            # The branch the action should deploy to.
-          folder: artifacts/marimo    # The folder the action should deploy.
+          name: marimo
+          path: artifacts/marimo
+          retention-days: 1
+
+  # Job to deploy the built book to GitHub Pages
+  deploy-book:
+    runs-on: ubuntu-latest
+    # This job depends on both jupyter and marimo jobs completing successfully
+    needs: page
+    # Need write permission to push to gh-pages branch
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
