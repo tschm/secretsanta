@@ -48,12 +48,12 @@ jobs:
           mkdir -p artifacts/marimo
           uv run marimo export html app.py -o artifacts/marimo/index.html
 
-      - name: Upload HTML artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: marimo
-          path: artifacts/marimo
-          retention-days: 1
+          path: artifacts/
+
 
   # Job to deploy the built book to GitHub Pages
   deploy-book:
