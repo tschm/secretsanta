@@ -6,19 +6,13 @@
 # Create a virtual environment using uv
 venv:
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
-	@uv venv
-
-
-# Mark install target as phony (not producing a file named 'install')
-.PHONY: install
-install: venv ## Install a virtual environment
+	@uv venv --python=3.12
 	@uv pip install --upgrade pip
-	@uv pip install --no-cache-dir -r requirements.txt
 
 
 # Format and lint the code using pre-commit
 .PHONY: fmt
-fmt: install ## Run autoformatting and linting
+fmt: venv ## Run autoformatting and linting
 	@uv run pip install --no-cache-dir pre-commit
 	@uv run pre-commit install
 	@uv run pre-commit run --all-files
@@ -52,5 +46,3 @@ app: install ## Run the Marimo app
 .PHONY: slides
 slides: install
 	@uv run marimo export html app.py -o app.html
-#.PHONY: slides
-#slides: install ## Present your slides
