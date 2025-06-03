@@ -65,6 +65,7 @@ jobs:
 
       # Upload the generated HTML files as a GitHub Actions artifact
       # This makes the files available for the deployment job
+
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
