@@ -50,9 +50,10 @@ jobs:
 
       - name: Upload static files as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+        uses: actions/upload-pages-artifact@v3
         with:
           path: artifacts/
+
 
   # Job to deploy the built book to GitHub Pages
   deploy-book:
