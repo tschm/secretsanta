@@ -13,9 +13,9 @@ venv:
 # Format and lint the code using pre-commit
 .PHONY: fmt
 fmt: venv ## Run autoformatting and linting
-	@uv run pip install --no-cache-dir pre-commit
-	@uv run pre-commit install
-	@uv run pre-commit run --all-files
+	#@uv run pip install --no-cache-dir pre-commit
+	@uvx pre-commit install
+	@uvx pre-commit run --all-files
 
 
 # Clean up generated files and remove stale branches
