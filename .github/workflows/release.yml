@@ -55,7 +55,7 @@ jobs:
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           mkdir -p artifacts/marimo
-          uvx marimo export html app.py -o artifacts/marimo/index.html
+          uvx marimo export html-wasm app.py -o artifacts/marimo/index.html --mode run
 
       - name: Upload Marimo html files
         uses: actions/upload-artifact@v4
