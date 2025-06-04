@@ -53,6 +53,7 @@ jobs:
       # This creates a standalone HTML page that can be deployed to GitHub Pages
       - name: Convert notebook to HTML
         run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
           mkdir -p artifacts/marimo
           uvx marimo export html app.py -o artifacts/marimo/index.html
 
