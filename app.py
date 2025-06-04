@@ -1,3 +1,9 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo",
+# ]
+# ///
 """
 Secret Santa App - A simple application to create Secret Santa pairings.
 
@@ -21,7 +27,7 @@ def _():
     2. shuffle_names: Randomly shuffles a list of names
 
     Returns:
-        tuple: (process_names, shuffle_names) functions for use in other cells
+        tuple: (process_names, shuffle_names) functions for other cells
     """
     from random import shuffle as random_shuffle
 

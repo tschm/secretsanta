@@ -6,8 +6,8 @@
 # Create a virtual environment using uv
 venv:
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
-	@uv venv --python=3.12
-	@uv pip install --upgrade pip
+	#@uv venv --python=3.12
+	#@uv pip install --upgrade pip
 
 
 # Format and lint the code using pre-commit
@@ -33,5 +33,5 @@ help:  ## Display this help screen
 
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
-marimo: install    ## Install Marimo
-	@uv run marimo edit app.py
+marimo: ## Install Marimo
+	@uvx marimo edit --sandbox app.py
