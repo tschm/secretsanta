@@ -13,7 +13,6 @@ venv:
 # Format and lint the code using pre-commit
 .PHONY: fmt
 fmt: venv ## Run autoformatting and linting
-	#@uv run pip install --no-cache-dir pre-commit
 	@uvx pre-commit install
 	@uvx pre-commit run --all-files
 
@@ -36,13 +35,3 @@ help:  ## Display this help screen
 .PHONY: marimo
 marimo: install    ## Install Marimo
 	@uv run marimo edit app.py
-
-# Run the Marimo application
-.PHONY: app
-app: install ## Run the Marimo app
-	@uv run marimo run app.py
-
-
-.PHONY: slides
-slides: install
-	@uv run marimo export html app.py -o app.html

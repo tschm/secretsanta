@@ -38,7 +38,7 @@ jobs:
 
   # Job to build the HTML page from the Marimo notebook
   # This job converts the app.py Marimo notebook to HTML and prepares it for deployment
-  page:
+  marimo:
     # This job depends on the tagging job completing successfully
     needs: tagging
     permissions:
@@ -49,48 +49,31 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      # Install the uv package manager for Python dependency management
-      # uv is a fast, reliable Python package installer and resolver
-      - name: Install uv
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-
       # Convert the Marimo notebook (app.py) to a static HTML file
       # This creates a standalone HTML page that can be deployed to GitHub Pages
       - name: Convert notebook to HTML
         run: |
-          uv run pip install --no-cache-dir marimo
           mkdir -p artifacts/marimo
-          uv run marimo export html app.py -o artifacts/marimo/index.html
+          uvx marimo export html app.py -o artifacts/marimo/index.html
 
-      # Upload the generated HTML files as a GitHub Actions artifact
-      # This makes the files available for the deployment job
-
-      - name: Upload static files as artifact
-        id: deployment
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload Marimo html files
+        uses: actions/upload-artifact@v4
         with:
+          name: marimo
           path: artifacts/marimo
+          retention-days: 1
 
+  book:
+    runs-on: "ubuntu-latest"
+    needs: [marimo]
 
-  # Job to deploy the built HTML to GitHub Pages
-  # This job takes the artifact from the page job and deploys it to GitHub Pages
-  deploy-book:
-    runs-on: ubuntu-latest
-    # This job depends on the page job completing successfully
-    needs: page
-    # Need specific permissions for GitHub Pages deployment
-    permissions:
-      pages: write      # Permission to deploy to Pages
-      id-token: write   # Permission to verify deployment origin
-
-    # Configure the deployment environment
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}  # URL will be available after deployment
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
-      # Deploy the artifact to GitHub Pages using GitHub's official action
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: tschm/cradle/actions/book@v0.1.71
