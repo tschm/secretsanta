@@ -10,51 +10,43 @@ import marimo
 __generated_with = "0.13.15"
 app = marimo.App()
 
+with app.setup:
+    from random import shuffle as random_shuffle
+
+    import marimo as mo
+
+
+@app.function
+def process_names(names_str: str) -> list[str]:
+    """Process a comma-separated string of names into a list.
+
+    Args:
+        names_str (str): Comma-separated string of names
+
+    Returns:
+        list: List of stripped names with empty entries removed
+    """
+    return [name.strip() for name in names_str.split(",") if name.strip()]
+
+
+@app.function
+def shuffle_names(names_list: list[str]) -> list[str]:
+    """Shuffle a list of names.
+
+    Args:
+        names_list (list): List of names to shuffle
+
+    Returns:
+        list: Shuffled list of names
+    """
+    # Create a copy to avoid modifying the original
+    result = names_list.copy()
+    random_shuffle(result)
+    return result
+
 
 @app.cell
 def _():
-    """
-    Define utility functions for processing and shuffling names.
-
-    This cell imports the random shuffle function and defines two helper functions:
-    1. process_names: Converts a comma-separated string into a list of names
-    2. shuffle_names: Randomly shuffles a list of names
-
-    Returns:
-        tuple: (process_names, shuffle_names) functions for other cells
-    """
-    from random import shuffle as random_shuffle
-
-    def process_names(names_str: str) -> list[str]:
-        """Process a comma-separated string of names into a list.
-
-        Args:
-            names_str (str): Comma-separated string of names
-
-        Returns:
-            list: List of stripped names with empty entries removed
-        """
-        return [name.strip() for name in names_str.split(",") if name.strip()]
-
-    def shuffle_names(names_list: list[str]) -> list[str]:
-        """Shuffle a list of names.
-
-        Args:
-            names_list (list): List of names to shuffle
-
-        Returns:
-            list: Shuffled list of names
-        """
-        # Create a copy to avoid modifying the original
-        result = names_list.copy()
-        random_shuffle(result)
-        return result
-
-    return process_names, shuffle_names
-
-
-@app.cell
-def _(mo):
     """
     Display the application title.
 
@@ -69,7 +61,7 @@ def _(mo):
 
 
 @app.cell
-def __input_names_a(mo):
+def __input_names_a():
     """
     Create input fields for two groups of names.
 
@@ -83,22 +75,22 @@ def __input_names_a(mo):
     Returns:
         tuple: (names_A, names_B) UI text input components containing the entered names
     """
-    names_A = mo.ui.text(placeholder="A,B,C...")
-    names_B = mo.ui.text(placeholder="A,B,C...")
+    names_a = mo.ui.text(placeholder="A,B,C...")
+    names_b = mo.ui.text(placeholder="A,B,C...")
 
     # Create text input fields with labels
     mo.md(
         f"""
-        Enter a comma-separated list of names for the 1st group: {names_A}
+        Enter a comma-separated list of names for the 1st group: {names_a}
 
-        Enter a comma-separated list of names for the 2nd group: {names_B}
+        Enter a comma-separated list of names for the 2nd group: {names_b}
         """
     )
-    return names_A, names_B
+    return names_a, names_b
 
 
 @app.cell
-def _(mo, names_A, names_B, process_names, shuffle_names):
+def _(names_a, names_b, process_names, shuffle_names):
     """
     Process input names, shuffle them, and display the results.
 
@@ -109,14 +101,14 @@ def _(mo, names_A, names_B, process_names, shuffle_names):
 
     Args:
         mo: The Marimo module for UI rendering
-        names_A: UI component containing names for the first group
-        names_B: UI component containing names for the second group
+        names_a: UI component containing names for the first group
+        names_b: UI component containing names for the second group
         process_names: Function to convert comma-separated strings to lists
         shuffle_names: Function to randomly shuffle lists
     """
     # Process the input strings into lists of names
-    aa = process_names(names_A.value)
-    bb = process_names(names_B.value)
+    aa = process_names(names_a.value)
+    bb = process_names(names_b.value)
 
     # Shuffle both lists randomly
     aa = shuffle_names(aa)
@@ -131,23 +123,6 @@ def _(mo, names_A, names_B, process_names, shuffle_names):
         """
     )
     return
-
-
-@app.cell
-def _():
-    """
-    Import the marimo module for UI functionality.
-
-    This cell imports the marimo module and makes it available to other cells
-    in the application. Marimo is used for creating interactive UI elements
-    and displaying content.
-
-    Returns:
-        tuple: (mo,) The marimo module for use in other cells
-    """
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":
