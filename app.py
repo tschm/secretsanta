@@ -1,9 +1,3 @@
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "marimo",
-# ]
-# ///
 """
 Secret Santa App - A simple application to create Secret Santa pairings.
 
