@@ -23,7 +23,6 @@ jobs:
       - name: List notebooks
         id: set-notebooks
         run: |
-          cd book/marimo
           # Get all .py files, excluding directories
           NOTEBOOKS=$(ls -p | grep -v / | grep '\.py$' | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "notebooks=$NOTEBOOKS" >> $GITHUB_OUTPUT
@@ -44,8 +43,5 @@ jobs:
 
       - name: Run notebook
         run: |
-          uv pip install --no-cache-dir marimo
-
-          cd book/marimo
           echo "Processing ${{ matrix.notebook }}"
           uv run python "${{ matrix.notebook }}"
