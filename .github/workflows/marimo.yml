@@ -13,4 +13,4 @@ jobs:
   test:
     uses: tschm/marimushka/.github/workflows/test.yml@main
     with:
-      notebook-dir: 'notebooks'
+      notebook-dir: 'apps'
