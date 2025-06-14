@@ -38,43 +38,35 @@ jobs:
 
   # Job to build the HTML page from the Marimo notebook
   # This job converts the app.py Marimo notebook to HTML and prepares it for deployment
-  marimo:
-    # This job depends on the tagging job completing successfully
+  # The build job exports marimo notebooks to static HTML/WebAssembly
+  build:
     needs: tagging
-    permissions:
-      contents: write  # Permission to read repository contents
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
     steps:
-      # Check out the repository code to access the Marimo notebook
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
+      - uses: tschm/marimushka/actions/export@main
+        #with:
+        #  template: 'templates/bare.html.j2'
+        # declare which template
+        # declare folder names
 
-      # Convert the Marimo notebook (app.py) to a static HTML file
-      # This creates a standalone HTML page that can be deployed to GitHub Pages
-      - name: Convert notebook to HTML
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          mkdir -p artifacts/marimo
-          uvx marimo export html-wasm app.py -o artifacts/marimo/index.html --mode run
 
-      - name: Upload Marimo html files
-        uses: actions/upload-artifact@v4
-        with:
-          name: marimo
-          path: artifacts/marimo
-          retention-days: 1
+  # The deploy job publishes the built site to GitHub Pages
+  deploy:
+    needs: build  # This job depends on the build job completing successfully
 
-  book:
-    runs-on: "ubuntu-latest"
-    needs: [marimo]
+    # Required permissions for the GitHub Pages deployment
+    permissions:
+      pages: write      # Permission to deploy to Pages
+      id-token: write   # Permission to verify the deployment
 
+    # Configure the deployment environment
     environment:
-      name: github-pages
+      name: github-pages                             # Deploy to the github-pages environment
+      url: ${{ steps.deployment.outputs.page_url }}  # Use the URL from the deployment step
 
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
     steps:
-      - uses: tschm/cradle/actions/book@v0.1.72
+      # Deploy the site to GitHub Pages using the official action
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment                 # ID used to reference this step's outputs
+        uses: actions/deploy-pages@v4  # GitHub's official Pages deployment action
