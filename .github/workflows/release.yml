@@ -65,4 +65,4 @@ jobs:
     steps:
       - name: Publish book
         id: deployment
-        uses: tschm/cradle/actions/book@v0.1.71
+        uses: tschm/cradle/actions/book@v0.1.72
