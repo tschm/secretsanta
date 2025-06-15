@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
     needs: tagging
     steps:
-      - uses: tschm/marimushka/actions/export@v0.0.8
+      - uses: tschm/marimushka/actions/export@v0.0.10
         with:
           apps: 'apps'
 
