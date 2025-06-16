@@ -20,4 +20,4 @@ jobs:
   test:
     uses: tschm/marimushka/.github/workflows/test.yml@v0.0.16
     with:
-      notebook-dir: notebooks
+      notebook-dir: apps
