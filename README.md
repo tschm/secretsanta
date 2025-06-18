@@ -2,6 +2,12 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/secretsanta/badge)](https://www.codefactor.io/repository/github/tschm/secretsanta)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://github.com/renovatebot/renovate)
+[![Maintenance](https://github.com/tschm/secretsanta/actions/workflows/maintain.yml/badge.svg)](https://github.com/tschm/secretsanta/actions/workflows/maintain.yml)
+[![Release](https://github.com/tschm/secretsanta/actions/workflows/release.yml/badge.svg)](https://github.com/tschm/secretsanta/actions/workflows/release.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tschm/secretsanta)](https://github.com/tschm/secretsanta/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-deployed-green)](https://tschm.github.io/secretsanta/marimushka/)
 
 ## 🎁 About
 
