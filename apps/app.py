@@ -4,12 +4,12 @@
 #     "marimo==0.13.15",
 # ]
 # ///
-"""
-Secret Santa App - A simple application to create Secret Santa pairings.
+"""Secret Santa App - A simple application to create Secret Santa pairings.
 
 This Marimo app allows users to input two groups of names, processes them,
 shuffles them, and displays the shuffled results. It can be used to organize
-co"""
+co
+"""
 
 import marimo
 
@@ -31,6 +31,7 @@ def process_names(names_str: str) -> list[str]:
 
     Returns:
         list: List of stripped names with empty entries removed
+
     """
     return [name.strip() for name in names_str.split(",") if name.strip()]
 
@@ -44,6 +45,7 @@ def shuffle_names(names_list: list[str]) -> list[str]:
 
     Returns:
         list: Shuffled list of names
+
     """
     # Create a copy to avoid modifying the original
     result = names_list.copy()
@@ -53,14 +55,14 @@ def shuffle_names(names_list: list[str]) -> list[str]:
 
 @app.cell
 def _():
-    """
-    Display the application title.
+    """Display the application title.
 
     This cell renders the main title of the Secret Santa application using Marimo's
     markdown functionality.
 
     Args:
         mo: The Marimo module for UI rendering
+
     """
     mo.md(r"""# Secret Santa""")
     return
@@ -68,8 +70,7 @@ def _():
 
 @app.cell
 def __input_names_a():
-    """
-    Create input fields for two groups of names.
+    """Create input fields for two groups of names.
 
     This cell creates two text input fields where users can enter comma-separated
     lists of names for two different groups. These groups will be used for the
@@ -80,6 +81,7 @@ def __input_names_a():
 
     Returns:
         tuple: (names_A, names_B) UI text input components containing the entered names
+
     """
     names_a = mo.ui.text(placeholder="A,B,C...")
     names_b = mo.ui.text(placeholder="A,B,C...")
@@ -97,8 +99,7 @@ def __input_names_a():
 
 @app.cell
 def _(names_a, names_b, process_names, shuffle_names):
-    """
-    Process input names, shuffle them, and display the results.
+    """Process input names, shuffle them, and display the results.
 
     This cell takes the input from the text fields, processes the comma-separated
     strings into lists, shuffles each list randomly, and displays the shuffled
@@ -111,6 +112,7 @@ def _(names_a, names_b, process_names, shuffle_names):
         names_b: UI component containing names for the second group
         process_names: Function to convert comma-separated strings to lists
         shuffle_names: Function to randomly shuffle lists
+
     """
     # Process the input strings into lists of names
     aa = process_names(names_a.value)
