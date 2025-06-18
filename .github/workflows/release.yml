@@ -12,13 +12,17 @@ on:
   workflow_dispatch
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # Job to generate a new version tag based on semantic versioning
   # This creates a new git tag with an incremented version number
   tagging:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     outputs:
       # This output variable makes the tag available to other jobs in the workflow
       new_tag: ${{ steps.tag_version.outputs.new_tag }}
