@@ -46,4 +46,4 @@ jobs:
       - uses: jebel-quant/marimushka/actions/export@v0.0.23
         with:
           apps: 'apps'
-          publish: 'true'
+
