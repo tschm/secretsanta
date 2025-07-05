@@ -64,3 +64,9 @@ jobs:
 
     steps:
       - uses: tschm/cradle/actions/book@v0.1.80
+        with:
+          title: "Secret Santa"
+          links: |
+            {
+              "Notebooks":"./marimushka/index.html"
+            }
